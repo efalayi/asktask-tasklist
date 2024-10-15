@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Link from "next/link";
+
 import "./globals.css";
+
+import { TASK_STATUSES } from "src/shared/lib/constants";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,6 +32,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* tasks nav */}
+        <div className="flex flex-row gap-x-2">
+          {TASK_STATUSES.map((status) => {
+            return (
+              <Link
+                key={status.label.toLowerCase()}
+                href={`/tasks/${status.value}`}
+              >
+                {status.label}
+              </Link>
+            );
+          })}
+        </div>
+
         {children}
       </body>
     </html>
