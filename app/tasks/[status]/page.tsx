@@ -13,14 +13,7 @@ export default async function TasksPage({
 
   return (
     <>
-      <h3>
-        Task List
-        <span className="ml-1">(status: {params.status})</span>
-      </h3>
-
-      <section>
-        <TaskList tasks={response?.data?.taskList} />
-      </section>
+      <TaskList tasks={response?.data?.taskList} status={params.status} />
     </>
   );
 }

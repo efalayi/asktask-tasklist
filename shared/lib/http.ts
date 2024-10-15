@@ -4,6 +4,11 @@ const taskListQueryFields = `{
   _id
   title
   status
+  type
+  start_date
+  end_date
+  createdAt
+  updatedAt
   images
 }`;
 

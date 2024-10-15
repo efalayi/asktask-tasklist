@@ -30,7 +30,6 @@ export interface ITask {
   type: string;
   start_date: string;
   end_date: string;
-  visible_from: Date;
   createdAt: Date;
   updatedAt: Date;
   images: Array<IImage>;
