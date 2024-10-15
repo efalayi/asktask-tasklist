@@ -1,23 +1,27 @@
 export enum TaskStatus {
-  NEW = "NEW",
-  OFFER_ACCEPTED = "OFFER_ACCEPTED",
-  COMPLETED = "COMPLETED",
+  NEW = 'NEW',
+  OFFER_ACCEPTED = 'OFFER_ACCEPTED',
+  COMPLETED = 'COMPLETED',
 }
 
 export const TASK_STATUSES = [
   {
-    label: "new",
-    value: "new",
+    label: 'new',
+    value: 'new',
   },
   {
-    label: "offer_accepted",
-    value: "offer_accepted",
+    label: 'Offer accepted',
+    value: 'offer_accepted',
   },
   {
-    label: "completed",
-    value: "completed",
+    label: 'Completed',
+    value: 'completed',
   },
 ];
+
+export interface IImage {
+  secure_url: string;
+}
 
 export interface ITask {
   _id: string;
@@ -29,4 +33,5 @@ export interface ITask {
   visible_from: Date;
   createdAt: Date;
   updatedAt: Date;
+  images: Array<IImage>;
 }

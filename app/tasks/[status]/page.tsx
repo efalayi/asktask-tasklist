@@ -1,4 +1,6 @@
-import { filterTaskList } from "src/shared/lib/http";
+import { filterTaskList } from 'src/shared/lib/http';
+
+import TaskList from 'src/shared/components/Task/TaskList';
 
 export default async function TasksPage({
   params,
@@ -11,18 +13,13 @@ export default async function TasksPage({
 
   return (
     <>
-      <div>My Post: {params.status}</div>
+      <h3>
+        Task List
+        <span className="ml-1">(status: {params.status})</span>
+      </h3>
 
       <section>
-        <ul>
-          {response?.data?.taskList.map((item) => {
-            return (
-              <span key={item._id} className="block">
-                {item._id}
-              </span>
-            );
-          })}
-        </ul>
+        <TaskList tasks={response?.data?.taskList} />
       </section>
     </>
   );

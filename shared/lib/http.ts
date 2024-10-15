@@ -1,18 +1,22 @@
-import { TaskStatus } from "./constants";
+import { TaskStatus } from './constants';
+
+const taskListQueryFields = `{
+  _id
+  title
+  status
+  images
+}`;
 
 export async function getTaskList() {
   const apiResponse = await fetch(process.env.API_URL, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
     body: JSON.stringify({
       query: `{
-        taskList {
-          _id
-          status
-        }
+        taskList ${taskListQueryFields}
       }`,
     }),
   });
@@ -31,17 +35,14 @@ export async function filterTaskList({ status }: { status: string }) {
   // const taskStatus = TaskStatus[status]
 
   const apiResponse = await fetch(process.env.API_URL, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
     body: JSON.stringify({
       query: `{
-        taskList(filter: { status: NEW}) {
-          _id
-          status
-        }
+        taskList(filter: { status: ${status.toUpperCase()}}) ${taskListQueryFields}
       }`,
     }),
   });

@@ -7,9 +7,9 @@ interface TaskListProps {
 const TaskList = (props: TaskListProps) => {
   const { tasks } = props;
   return (
-    <ul>
+    <ul role="list" className="divide-y divide-gray-100">
       {tasks.map(task => (
-        <TaskItem {...task} />
+        <TaskItem key={task._id} {...task} />
       ))}
     </ul>
   );

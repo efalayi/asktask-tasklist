@@ -1,33 +1,21 @@
-import { getTaskList } from "src/shared/lib/http";
+import { getTaskList } from 'src/shared/lib/http';
 
+import TaskList from 'src/shared/components/Task/TaskList';
 
 export default async function Home() {
   const response = await getTaskList();
 
-  console.log("response: ", response.data);
+  console.log('response: ', response.data);
   return (
-    <div className="font-[family-name:var(--font-geist-sans)]">
-      <main className="">
-        <section>
-          <h2>Task List</h2>
-        </section>
+    <>
+      <h3>
+        Task List
+        <span className="ml-1">(All)</span>
+      </h3>
 
-        <section>
-          <ul>
-            {response?.data?.taskList.map((item) => {
-              return (
-                <li key={item._id} className="block">
-                  {item._id}
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-      </main>
-
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <span>footer</span>
-      </footer>
-    </div>
+      <section>
+        <TaskList tasks={response?.data?.taskList} />
+      </section>
+    </>
   );
 }
