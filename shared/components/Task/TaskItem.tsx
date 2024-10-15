@@ -3,10 +3,18 @@ import { ITask, TaskStatus } from 'src/shared/lib/constants';
 
 import { getTimeFromNow } from 'src/shared/lib/date';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface TaskItemProps extends ITask {}
 
 const TaskItem = (props: TaskItemProps) => {
-  const { images: taskImages, title, status, updatedAt } = props;
+  const {
+    images: taskImages,
+    title,
+    status,
+    updatedAt,
+    number_of_likes,
+    number_of_offers,
+  } = props;
   return (
     <li className="flex justify-between gap-x-6 py-5">
       <div className="flex min-w-0 gap-x-4">
@@ -27,9 +35,10 @@ const TaskItem = (props: TaskItemProps) => {
           <p className="text-sm font-semibold leading-6 text-blue-400">
             {title}
           </p>
-          <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-            {title}
-          </p>
+          <span className="inline-flex gap-x-2 mt-1 text-xs leading-5 text-gray-500">
+            <span>Likes: {number_of_likes}</span>
+            <span>Offers: {number_of_offers}</span>
+          </span>
         </div>
       </div>
       <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">

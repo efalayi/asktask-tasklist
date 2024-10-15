@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ITask } from 'src/shared/lib/constants';
 import { sortTaskByTitle, SortOrder } from 'src/shared/lib/utils';
 import TaskItem from './TaskItem';
@@ -11,25 +11,19 @@ interface TaskListProps {
 }
 const TaskList = (props: TaskListProps) => {
   const { tasks, status } = props;
-  const [listItems, setListItems] = useState<ITask[]>(tasks);
   const [currentSortOrder, setCurrentSortOrder] = useState('');
 
-  useEffect(() => {
-    function handleSorting() {
-      if (currentSortOrder !== '') {
-        const [, order] = currentSortOrder.split('_');
+  const sortedItems = useMemo(() => {
+    const [, order] = currentSortOrder.split('_');
 
-        const sortedList = sortTaskByTitle(listItems, order as SortOrder);
-        setListItems(sortedList);
-      }
-    }
+    return order ? sortTaskByTitle([...tasks], order as SortOrder) : tasks;
+  }, [currentSortOrder, tasks]);
 
-    handleSorting();
-  }, [listItems, currentSortOrder]);
+  console.log('tasks: ', tasks);
 
   return (
     <>
-      <section className="flex items-center justify-between">
+      <section className="flex items-center justify-between mb-5">
         <h3>
           Task List
           <span className="ml-1 capitalize">
@@ -53,8 +47,9 @@ const TaskList = (props: TaskListProps) => {
           </select>
         </label>
       </section>
-      <ul role="list" className="divide-y divide-gray-100">
-        {listItems.map(task => (
+
+      <ul role="list" className="divide-y divide-gray-800">
+        {sortedItems.map(task => (
           <TaskItem key={task._id} {...task} />
         ))}
       </ul>

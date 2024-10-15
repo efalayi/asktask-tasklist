@@ -33,4 +33,6 @@ export interface ITask {
   createdAt: Date;
   updatedAt: Date;
   images: Array<IImage>;
+  number_of_likes: string;
+  number_of_offers: string;
 }

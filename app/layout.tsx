@@ -33,7 +33,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <header className="flex flex-col items-center justify-center gap-y-3 p-3">
-          <h3 className="mt-3 text-3xl font-extrabold tracking-tight">
+          <h3 className="my-3 text-3xl font-extrabold tracking-tight">
             The Task List View
           </h3>
           {/* tasks nav */}
@@ -51,7 +51,7 @@ export default function RootLayout({
           </Navbar>
         </header>
 
-        <main className="p-4 font-[family-name:var(--font-geist-sans)]">
+        <main className="px-3 py-4 sm:px-8 font-[family-name:var(--font-geist-sans)]">
           {children}
         </main>
 

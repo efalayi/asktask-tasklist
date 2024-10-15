@@ -1,5 +1,3 @@
-import { TaskStatus } from './constants';
-
 const taskListQueryFields = `{
   _id
   title
@@ -10,6 +8,8 @@ const taskListQueryFields = `{
   createdAt
   updatedAt
   images
+  number_of_likes
+  number_of_offers
 }`;
 
 export async function getTaskList() {
