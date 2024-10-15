@@ -12,15 +12,14 @@ interface TaskListProps {
 const TaskList = (props: TaskListProps) => {
   const { tasks, status } = props;
   const [listItems, setListItems] = useState<ITask[]>(tasks);
-  const [currentSortOrder, setCurrentSortOrder] = useState<SortOrder | ''>('');
+  const [currentSortOrder, setCurrentSortOrder] = useState('');
 
   useEffect(() => {
     function handleSorting() {
       if (currentSortOrder !== '') {
-        const sortedList = sortTaskByTitle(
-          listItems,
-          currentSortOrder as SortOrder
-        );
+        const [, order] = currentSortOrder.split('_');
+
+        const sortedList = sortTaskByTitle(listItems, order as SortOrder);
         setListItems(sortedList);
       }
     }
@@ -46,8 +45,7 @@ const TaskList = (props: TaskListProps) => {
             className="h-full rounded-md border-0 px-2 py-1 text-blue-500 font-medium focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm"
             value={currentSortOrder}
             onChange={event => {
-              const [, order] = event.target.value.split('_');
-              setCurrentSortOrder(order as SortOrder);
+              setCurrentSortOrder(event.target.value);
             }}>
             <option value="">Sort by:</option>
             <option value="title_asc">Title: ascending</option>

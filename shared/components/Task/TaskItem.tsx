@@ -1,5 +1,7 @@
 import Image from 'next/image';
-import { ITask } from 'src/shared/lib/constants';
+import { ITask, TaskStatus } from 'src/shared/lib/constants';
+
+import { getTimeFromNow } from 'src/shared/lib/date';
 
 interface TaskItemProps extends ITask {}
 
@@ -31,9 +33,15 @@ const TaskItem = (props: TaskItemProps) => {
         </div>
       </div>
       <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-        <p className="text-sm leading-6 text-green-300">{status}</p>
+        <span
+          className={`leading-6 rounded-md border-0 px-2 py-1 font-medium ${status === TaskStatus.COMPLETED ? 'bg-green-50 text-green-600' : status === TaskStatus.OFFER_ACCEPTED ? 'bg-yellow-50 text-yellow-600' : 'bg-blue-50 text-blue-600'}`}>
+          <small>{status}</small>
+        </span>
         <p className="mt-1 text-xs leading-5 text-gray-500">
-          Last updated <time dateTime={updatedAt.toString()}>3h ago</time>
+          Last updated{' '}
+          <time dateTime={updatedAt.toString()}>
+            {getTimeFromNow(updatedAt)}
+          </time>
         </p>
       </div>
     </li>
